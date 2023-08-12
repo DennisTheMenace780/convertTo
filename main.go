@@ -5,25 +5,28 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strings"
 )
 
 func main() {
 	fmt.Println("Enter a 4 bit binary number: ")
 
-	userInput := captureInput(os.Stdin)
+	var userInput string
 
-	fmt.Println("Your number is:", userInput)
-}
+	for {
+		userInput = captureInput(os.Stdin)
 
-func captureInput2() (input string) {
-    // Don't bother with this; just experimenting w/ Scans
-	_, err := fmt.Scanln(&input)
-	if err != nil {
-		if errors.Is(err, io.EOF)  {
-		    fmt.Println("Reading file finished ...")
+		_, ok := is4DigitBinaryString(userInput)
+
+		if !ok {
+			fmt.Println("Require a 4 digit binary number, please try again")
+		} else {
+			break
 		}
 	}
-	return input
+
+	fmt.Println("Your number is:", userInput)
+
 }
 
 func captureInput(rdr io.Reader) (input string) {
@@ -35,4 +38,32 @@ func captureInput(rdr io.Reader) (input string) {
 	return input
 }
 
+func is4DigitBinaryString(input string) (length int, validString bool) {
+	splitInput := strings.Split(input, "")
+	length = len(splitInput)
 
+	if length != 4 {
+		validString = false
+		return length, validString
+	}
+
+	for _, bit := range splitInput {
+		if bit == "1" || bit == "0" { // Equivalent !(A || B)
+			validString = true
+		} else {
+            break
+        }
+	}
+	return length, validString
+}
+
+func captureInput2() (input string) {
+	// Don't bother with this; just experimenting w/ Scans
+	_, err := fmt.Scanln(&input)
+	if err != nil {
+		if errors.Is(err, io.EOF) {
+			fmt.Println("Reading file finished ...")
+		}
+	}
+	return input
+}

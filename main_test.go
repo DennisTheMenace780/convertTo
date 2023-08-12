@@ -7,6 +7,10 @@ import (
 	"testing"
 )
 
+// TODO: Analyze test cases to make sure they're doing what they should be doing. 
+// Am I testing everything correctly?
+// Am I covering else branches?
+
 func TestCaptureInput(t *testing.T) {
 
 	t.Run("Prints the input value back to user", func(t *testing.T) {
@@ -22,17 +26,24 @@ func TestCaptureInput(t *testing.T) {
 		}
 	})
 
-	t.Run("Prints the input value back to user", func(t *testing.T) {
+	t.Run("assert input is a 4 digit binary string", func(t *testing.T) {
 
 		input := "1010\n"
 		rdr := strings.NewReader(input)
 
 		captured := captureInput(rdr)
-		want := "1010"
+		length, ok := is4DigitBinaryString(captured)
 
-		if captured != want {
-			t.Error("unexpected result:", captured)
+		expectedLength := 4
+
+		if !ok {
+			t.Error("Detected a non-binary string: ", captured)
 		}
+
+		if length != expectedLength {
+			t.Errorf("Got length of %q, want length of %q", length, expectedLength)
+		}
+
 	})
 }
 
@@ -56,9 +67,9 @@ func TestCaptureInput2(t *testing.T) {
 			log.Fatal(err)
 		}
 
-		// Seek sets the offset for the next Read or Write on file to offset, interpreted 
-        // according to whence: 0 means relative to the origin of the file, 1 means relative
-        // to the current offset, and 2 means relative to the end.
+		// Seek sets the offset for the next Read or Write on file to offset, interpreted
+		// according to whence: 0 means relative to the origin of the file, 1 means relative
+		// to the current offset, and 2 means relative to the end.
 		if _, err := tmpfile.Seek(0, 0); err != nil {
 			log.Fatal(err)
 		}
@@ -77,7 +88,6 @@ func TestCaptureInput2(t *testing.T) {
 		}
 	})
 }
-
 
 // func TestCaptureMultipleInputs(t *testing.T) {
 //
