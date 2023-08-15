@@ -49,11 +49,12 @@ func is4DigitBinaryString(input string) (length int, validString bool) {
 	}
 
 	for _, bit := range splitInput {
-		if bit == "1" || bit == "0" { // Equivalent !(A || B)
-			validString = true
+		if bit != "1" && bit != "0" { // Equivalent !(A || B)
+			validString = false
+			break
 		} else {
-            break
-        }
+			validString = true
+		}
 	}
 	return length, validString
 }
