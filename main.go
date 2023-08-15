@@ -59,9 +59,9 @@ func is4DigitBinaryString(input string) (length int, validString bool) {
 	return length, validString
 }
 
-func captureInput2() (input string) {
+func captureInput2(f *os.File) (input string) {
 	// Don't bother with this; just experimenting w/ Scans
-	_, err := fmt.Scanln(&input)
+	_, err := fmt.Scan(&input)
 	if err != nil {
 		if errors.Is(err, io.EOF) {
 			fmt.Println("Reading file finished ...")
