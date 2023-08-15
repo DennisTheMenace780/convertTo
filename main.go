@@ -4,7 +4,9 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"math"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -32,7 +34,7 @@ func main() {
 func captureInput(rdr io.Reader) (input string) {
 	_, err := fmt.Fscanln(rdr, &input)
 	if err != nil {
-        // TODO: #001 not sure how to handle "unexpected newline" error
+		// TODO: #001 not sure how to handle "unexpected newline" error
 		fmt.Println("Error:", err)
 	}
 
@@ -57,6 +59,23 @@ func is4DigitBinaryString(input string) (length int, validString bool) {
 		}
 	}
 	return length, validString
+}
+
+func binaryToDecimal(binNum string) string {
+	numStr := strings.Split(binNum, "")
+
+	var decimalValue float64
+
+	for i, v := range numStr {
+		exponent := float64(len(numStr)) - (float64(i) + 1.0)
+		n, err := strconv.Atoi(v)
+		if err != nil {
+            fmt.Println("Problem converting to string", err)
+		}
+		decimalValue += float64(n) * math.Pow(2.0, exponent)
+	}
+
+    return strconv.Itoa(int(decimalValue))
 }
 
 func captureInput2(f *os.File) (input string) {
