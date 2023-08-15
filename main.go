@@ -32,7 +32,8 @@ func main() {
 func captureInput(rdr io.Reader) (input string) {
 	_, err := fmt.Fscanln(rdr, &input)
 	if err != nil {
-		panic(err)
+        // TODO: #001 not sure how to handle "unexpected newline" error
+		fmt.Println("Error:", err)
 	}
 
 	return input
