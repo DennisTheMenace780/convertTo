@@ -12,7 +12,8 @@ func TestCaptureInput(t *testing.T) {
 		input := "1010\n"
 		rdr := strings.NewReader(input)
 
-		captured := captureInput(rdr)
+		captured, _ := captureInput(rdr)
+
 		want := "1010"
 
 		if captured != want {
@@ -37,7 +38,7 @@ func TestCaptureInput(t *testing.T) {
 		}
 		for _, c := range cases {
 			rdr := strings.NewReader(c.input)
-			captured := captureInput(rdr)
+			captured, _ := captureInput(rdr)
 
 			_, ok := is4DigitBinaryString(captured)
 
@@ -75,6 +76,57 @@ func TestConvert(t *testing.T) {
 			}
 		}
 	})
+}
+
+func TestFindPQ(t *testing.T) {
+	cases := []struct {
+		m float64
+		p float64
+		q float64
+	}{
+		{5.0, 2.0, 3.0},
+		{23.0, 4.0, 5.0},
+		{102.0, 6.0, 7.0},
+		{244.0, 7.0, 8.0},
+		{456.0, 8.0, 9.0},
+		{789.0, 9.0, 10.0},
+		{1245.0, 10.0, 11.0},
+		{3078.0, 11.0, 12.0},
+		{5623.0, 12.0, 13.0},
+		{9850.0, 13.0, 14.0},
+		{15672.0, 13.0, 14.0},
+	}
+	t.Run("Find p and q given m", func(t *testing.T) {
+		for _, c := range cases {
+			p, q := findPandQ(c.m)
+			if p != c.p {
+				t.Errorf("got %f, want %f", p, c.p)
+			}
+			if q != c.q {
+				t.Errorf("got %f, want %f", q, c.q)
+			}
+		}
+	})
+}
+
+func TestDecimalToBinary(t *testing.T) {
+	cases := []struct {
+		input  string
+		output string
+	}{
+		{"3", "11"},
+        {"85", "1010101"},
+		{"4", "100"},
+	}
+
+	for _, c := range cases {
+
+		b := decimalToBinary(c.input)
+		if b != c.output {
+			t.Errorf("got %q, want %q", b, c.output)
+		}
+	}
+
 }
 
 // func TestCaptureInputPipe(t *testing.T) {

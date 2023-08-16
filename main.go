@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"errors"
 	"fmt"
 	"io"
@@ -16,7 +17,12 @@ func main() {
 	var userInput string
 
 	for {
-		userInput = captureInput(os.Stdin)
+		userInput, err := captureInput(os.Stdin)
+		if err != nil {
+			if errors.Is(err, io.EOF) {
+				fmt.Println("Require a 4 digit binary number, please try again")
+			}
+		}
 
 		_, ok := is4DigitBinaryString(userInput)
 
@@ -31,14 +37,14 @@ func main() {
 
 }
 
-func captureInput(rdr io.Reader) (input string) {
+func captureInput(rdr io.Reader) (string, error) {
+	var input string
 	_, err := fmt.Fscanln(rdr, &input)
 	if err != nil {
-		// TODO: #001 not sure how to handle "unexpected newline" error
-		fmt.Println("Error:", err)
+		return input, err
 	}
 
-	return input
+	return input, err
 }
 
 func is4DigitBinaryString(input string) (length int, validString bool) {
@@ -70,12 +76,47 @@ func binaryToDecimal(binNum string) string {
 		exponent := float64(len(numStr)) - (float64(i) + 1.0)
 		n, err := strconv.Atoi(v)
 		if err != nil {
-            fmt.Println("Problem converting to string", err)
+			fmt.Println("Problem converting to string", err)
 		}
 		decimalValue += float64(n) * math.Pow(2.0, exponent)
 	}
 
-    return strconv.Itoa(int(decimalValue))
+	return strconv.Itoa(int(decimalValue))
+}
+
+func findPandQ(m float64) (float64, float64) {
+	// solving 2^p < m
+	p := math.Floor(math.Log2(m))
+	return p, p + 1
+}
+
+func decimalToBinary(m string) string {
+
+	var output bytes.Buffer
+
+	v, err := strconv.Atoi(m)
+	if err != nil {
+		fmt.Println("Error", err)
+	}
+
+	topNumber := float64(v)
+	p, _ := findPandQ(topNumber)
+
+	for p > -1 {
+
+		remainder := math.Mod(topNumber, math.Pow(2.0, p))
+
+		if topNumber >= math.Pow(2.0, p) {
+			output.WriteString("1")
+		} else {
+			output.WriteString("0")
+		}
+
+        topNumber = remainder
+
+		p -= 1
+	}
+	return output.String()
 }
 
 func captureInput2(f *os.File) (input string) {
