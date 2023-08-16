@@ -114,9 +114,9 @@ func TestDecimalToBinary(t *testing.T) {
 		input  string
 		output string
 	}{
-		{"3", "11"},
-        {"85", "1010101"},
-		{"4", "100"},
+		{"3", "0011"},
+        {"85", "01010101"},
+		{"4", "0100"},
 	}
 
 	for _, c := range cases {

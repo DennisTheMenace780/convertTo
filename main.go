@@ -112,11 +112,34 @@ func decimalToBinary(m string) string {
 			output.WriteString("0")
 		}
 
-        topNumber = remainder
+		topNumber = remainder
 
 		p -= 1
 	}
-	return output.String()
+
+    prettyString := prettyBinaryString(output.String())
+
+    return prettyString
+	// return output.String()
+}
+
+func prettyBinaryString(binStr string) string {
+	var b bytes.Buffer
+	if len(binStr) < 4 {
+		diff := 4 - len(binStr)
+		for n := 0; n < diff; n++ {
+			b.WriteString("0")
+		}
+		b.WriteString(binStr)
+	}
+	if len(binStr) > 4 && len(binStr) < 8 {
+		diff := 8 - len(binStr)
+		for n := 0; n < diff; n++ {
+			b.WriteString("0")
+		}
+		b.WriteString(binStr)
+	}
+	return b.String()
 }
 
 func captureInput2(f *os.File) (input string) {
