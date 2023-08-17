@@ -38,8 +38,6 @@ func main() {
 
 }
 
-type BinaryString string
-
 func captureInput(rdr io.Reader) (string, error) {
 	var input string
 	_, err := fmt.Fscanln(rdr, &input)
@@ -111,8 +109,7 @@ func decimalToBinary(m string) string {
 		numerator = remainder
 		p -= 1
 	}
-
-	return prettyBinaryString(binaryString.String())
+    return binaryString.String()
 }
 
 func prettyBinaryString(binStr string) string {
@@ -131,15 +128,4 @@ func prettyBinaryString(binStr string) string {
 	b.WriteString(binStr)
 
 	return b.String()
-}
-
-func captureInput2(f *os.File) (input string) {
-	// Don't bother with this; just experimenting w/ Scans
-	_, err := fmt.Scan(&input)
-	if err != nil {
-		if errors.Is(err, io.EOF) {
-			fmt.Println("Reading file finished ...")
-		}
-	}
-	return input
 }

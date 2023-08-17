@@ -111,9 +111,9 @@ func TestDecimalToBinary(t *testing.T) {
 		input  string
 		output string
 	}{
-		{"3", "0011"},
-        {"85", "01010101"},
-		{"4", "0100"},
+		{"3", "11"},
+        {"85", "1010101"},
+		{"4", "100"},
 	}
 
 	for _, c := range cases {
@@ -126,81 +126,22 @@ func TestDecimalToBinary(t *testing.T) {
 
 }
 
-// func TestCaptureInputPipe(t *testing.T) {
-// 	r, w, _ := os.Pipe()
-// 	w.Write([]byte("1010\n"))
-//
-// 	got := captureInput2(r)
-// 	want := "1010"
-// 	if got != want {
-// 		t.Errorf("got %q, want %q", got, want)
-// 	}
-// }
+func TestDecimalToBinaryPrettyPrint(t *testing.T) {
+	cases := []struct {
+		input  string
+		output string
+	}{
+		{"3", "0011"},
+        {"85", "01010101"},
+		{"4", "0100"},
+	}
 
-// func TestCaptureInput2(t *testing.T) {
-//
-// 	t.Run("Prints the input value back to user", func(t *testing.T) {
-//
-// 		want := "1010"
-//
-// 		// Create a temporary file for IO
-// 		tmpfile, err := os.CreateTemp("", "exampleDaddy")
-// 		if err != nil {
-// 			log.Fatal(err)
-// 		}
-//
-// 		// Clean up file
-// 		defer os.Remove(tmpfile.Name())
-//
-// 		// Write to the tmpfile
-// 		if _, err := tmpfile.WriteString(want); err != nil {
-// 			log.Fatal(err)
-// 		}
-//
-// 		// Seek sets the offset for the next Read or Write on file to offset, interpreted
-// 		// according to whence: 0 means relative to the origin of the file, 1 means relative
-// 		// to the current offset, and 2 means relative to the end.
-// 		if _, err := tmpfile.Seek(0, 0); err != nil {
-// 			log.Fatal(err)
-// 		}
-//
-// 		// assign the old value of os.Stdin to something and restore later
-// 		oldStdin := os.Stdin
-// 		defer func() { os.Stdin = oldStdin }()
-//
-// 		// Set the stdin to what was written into tmpfile
-// 		os.Stdin = tmpfile
-//
-// 		captured := captureInput2()
-//
-// 		if captured != want {
-// 			t.Error("unexpected result:", want)
-// 		}
-// 	})
-// }
+	for _, c := range cases {
 
-// func TestCaptureMultipleInputs(t *testing.T) {
-//
-// 	cases := []struct {
-// 		input    string
-// 		expected string
-// 	}{
-// 		{"0101", "0101"},
-// 		{"1010", "1010"},
-// 		{"0000", "0000"},
-// 	}
-//
-// 	for _, c := range cases {
-// 		t.Run(fmt.Sprintf("Echos the input %s back to user", c.input), func(t *testing.T) {
-//
-// 			rdr := strings.NewReader(c.input)
-//
-// 			capturedInput := captureInput(rdr)
-// 			want := c.expected
-//
-// 			if capturedInput != want {
-// 				t.Error("unexpected result:", c.input)
-// 			}
-// 		})
-// 	}
-// }
+		b := decimalToBinary(c.input)
+		if prettyBinaryString(b) != c.output {
+			t.Errorf("got %q, want %q", b, c.output)
+		}
+	}
+
+}
