@@ -82,10 +82,9 @@ func binaryToDecimal(binNum string) string {
 	return strconv.Itoa(int(decimalValue))
 }
 
-func findPandQ(m float64) (float64, float64) {
-	// solving 2^p < m
-	p := math.Floor(math.Log2(m))
-	return p, p + 1
+func findP(m float64) (p float64) {
+	// solving for 2^p = m
+	return math.Floor(math.Log2(m))
 }
 
 func decimalToBinary(m string) string {
@@ -98,7 +97,7 @@ func decimalToBinary(m string) string {
 	}
 
 	topNumber := float64(v)
-	p, _ := findPandQ(topNumber)
+	p := findP(topNumber)
 
 	for p > -1 {
 

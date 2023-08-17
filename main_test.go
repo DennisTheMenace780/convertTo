@@ -98,12 +98,9 @@ func TestFindPQ(t *testing.T) {
 	}
 	t.Run("Find p and q given m", func(t *testing.T) {
 		for _, c := range cases {
-			p, q := findPandQ(c.m)
+			p := findP(c.m)
 			if p != c.p {
 				t.Errorf("got %f, want %f", p, c.p)
-			}
-			if q != c.q {
-				t.Errorf("got %f, want %f", q, c.q)
 			}
 		}
 	})
