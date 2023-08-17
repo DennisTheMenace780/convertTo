@@ -21,14 +21,14 @@ func TestCaptureInput(t *testing.T) {
 		}
 	})
 
-	t.Run("assert input is a 4 digit binary string", func(t *testing.T) {
+	t.Run("assert input is a binary string", func(t *testing.T) {
 
 		cases := []struct {
 			input    string
 			expected bool
 		}{
 			{"0000", true},
-			{"01", false},
+			{"01", true},
 			{"0300", false},
 			{"0010", true},
 			{"12345", false},
@@ -40,7 +40,7 @@ func TestCaptureInput(t *testing.T) {
 			rdr := strings.NewReader(c.input)
 			captured, _ := captureInput(rdr)
 
-			_, ok := is4DigitBinaryString(captured)
+			_, ok := isBinaryString(captured)
 
 			if ok != c.expected {
 				t.Error("Detected an invalid input: ", captured)
