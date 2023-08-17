@@ -17,18 +17,19 @@ func main() {
 	var userInput string
 
 	for {
-		userInput, err := captureInput(os.Stdin)
+		input, err := captureInput(os.Stdin)
 		if err != nil {
 			if errors.Is(err, io.EOF) {
 				fmt.Println("Require a 4 digit binary number, please try again")
 			}
 		}
 
-		_, ok := is4DigitBinaryString(userInput)
+		_, ok := isBinaryString(input)
 
 		if !ok {
 			fmt.Println("Require a 4 digit binary number, please try again")
 		} else {
+			userInput = input
 			break
 		}
 	}
@@ -36,6 +37,8 @@ func main() {
 	fmt.Println("Your number is:", userInput)
 
 }
+
+type BinaryString string
 
 func captureInput(rdr io.Reader) (string, error) {
 	var input string
@@ -47,24 +50,20 @@ func captureInput(rdr io.Reader) (string, error) {
 	return input, err
 }
 
-func is4DigitBinaryString(input string) (length int, validString bool) {
-	splitInput := strings.Split(input, "")
-	length = len(splitInput)
+func isBinaryString(str string) (length int, ok bool) {
+    // Maybe return error instead with a specific format string?
+	splitStr := strings.Split(str, "")
+    length = len(splitStr)
 
-	if length != 4 {
-		validString = false
-		return length, validString
-	}
-
-	for _, bit := range splitInput {
+	for _, bit := range splitStr {
 		if bit != "1" && bit != "0" { // Equivalent !(A || B)
-			validString = false
+			ok = false
 			break
 		} else {
-			validString = true
+			ok = true
 		}
 	}
-	return length, validString
+    return length, ok
 }
 
 func binaryToDecimal(binNum string) string {
@@ -117,9 +116,9 @@ func decimalToBinary(m string) string {
 		p -= 1
 	}
 
-    prettyString := prettyBinaryString(output.String())
+	prettyString := prettyBinaryString(output.String())
 
-    return prettyString
+	return prettyString
 	// return output.String()
 }
 
