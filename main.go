@@ -51,18 +51,18 @@ func captureInput(rdr io.Reader) (string, error) {
 }
 
 func isBinaryString(str string) (ok bool) {
-    // Maybe return error instead with a specific format string?
+	// Maybe return error instead with a specific format string?
 	splitStr := strings.Split(str, "")
 
 	for _, bit := range splitStr {
 		if bit != "1" && bit != "0" { // Equivalent !(A || B)
-            ok = false
+			ok = false
 			break
 		} else {
 			ok = true
 		}
 	}
-    return ok
+	return ok
 }
 
 func binaryToDecimal(binNum string) string {
@@ -82,60 +82,54 @@ func binaryToDecimal(binNum string) string {
 	return strconv.Itoa(int(decimalValue))
 }
 
-func findP(m float64) (p float64) {
+func findLargestExponent(m float64) (p float64) {
 	// solving for 2^p = m
 	return math.Floor(math.Log2(m))
 }
 
 func decimalToBinary(m string) string {
-
-	var output bytes.Buffer
+	var binaryString bytes.Buffer
 
 	v, err := strconv.Atoi(m)
 	if err != nil {
 		fmt.Println("Error", err)
 	}
 
-	topNumber := float64(v)
-	p := findP(topNumber)
+	numerator := float64(v)
+	p := findLargestExponent(numerator)
 
 	for p > -1 {
+		denominator := math.Pow(2.0, p)
+		remainder := math.Mod(numerator, denominator)
 
-		remainder := math.Mod(topNumber, math.Pow(2.0, p))
-
-		if topNumber >= math.Pow(2.0, p) {
-			output.WriteString("1")
+		if numerator >= denominator {
+			binaryString.WriteString("1")
 		} else {
-			output.WriteString("0")
+			binaryString.WriteString("0")
 		}
 
-		topNumber = remainder
-
+		numerator = remainder
 		p -= 1
 	}
 
-	prettyString := prettyBinaryString(output.String())
-
-	return prettyString
-	// return output.String()
+	return prettyBinaryString(binaryString.String())
 }
 
 func prettyBinaryString(binStr string) string {
 	var b bytes.Buffer
+	var diff int
+
 	if len(binStr) < 4 {
-		diff := 4 - len(binStr)
-		for n := 0; n < diff; n++ {
-			b.WriteString("0")
-		}
-		b.WriteString(binStr)
+		diff = 4 - len(binStr)
+	} else if len(binStr) > 4 && len(binStr) < 8 {
+		diff = 8 - len(binStr)
 	}
-	if len(binStr) > 4 && len(binStr) < 8 {
-		diff := 8 - len(binStr)
-		for n := 0; n < diff; n++ {
-			b.WriteString("0")
-		}
-		b.WriteString(binStr)
+
+	for n := 0; n < diff; n++ {
+		b.WriteString("0")
 	}
+	b.WriteString(binStr)
+
 	return b.String()
 }
 

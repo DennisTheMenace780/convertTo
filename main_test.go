@@ -78,7 +78,7 @@ func TestConvert(t *testing.T) {
 	})
 }
 
-func TestFindPQ(t *testing.T) {
+func TestFindLargestExponent(t *testing.T) {
 	cases := []struct {
 		m float64
 		p float64
@@ -98,7 +98,7 @@ func TestFindPQ(t *testing.T) {
 	}
 	t.Run("Find p and q given m", func(t *testing.T) {
 		for _, c := range cases {
-			p := findP(c.m)
+			p := findLargestExponent(c.m)
 			if p != c.p {
 				t.Errorf("got %f, want %f", p, c.p)
 			}
