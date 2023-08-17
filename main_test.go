@@ -40,7 +40,7 @@ func TestCaptureInput(t *testing.T) {
 			rdr := strings.NewReader(c.input)
 			captured, _ := captureInput(rdr)
 
-			_, ok := isBinaryString(captured)
+		    ok := isBinaryString(captured)
 
 			if ok != c.expected {
 				t.Error("Detected an invalid input: ", captured)
