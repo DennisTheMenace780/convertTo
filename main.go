@@ -2,39 +2,16 @@ package main
 
 import (
 	"bytes"
-	"errors"
 	"fmt"
 	"io"
 	"math"
-	"os"
 	"strconv"
 	"strings"
 )
 
 func main() {
-	fmt.Println("Enter a 4 bit binary number: ")
 
-	var userInput string
-
-	for {
-		input, err := captureInput(os.Stdin)
-		if err != nil {
-			if errors.Is(err, io.EOF) {
-				fmt.Println("Require a 4 digit binary number, please try again")
-			}
-		}
-
-		ok := isBinaryString(input)
-
-		if !ok {
-			fmt.Println("Require a 4 digit binary number, please try again")
-		} else {
-			userInput = input
-			break
-		}
-	}
-
-	fmt.Println("Your number is:", userInput)
+	RunConsolePromptApp()
 
 }
 
@@ -109,7 +86,7 @@ func decimalToBinary(m string) string {
 		numerator = remainder
 		p -= 1
 	}
-    return binaryString.String()
+	return binaryString.String()
 }
 
 func prettyBinaryString(binStr string) string {
