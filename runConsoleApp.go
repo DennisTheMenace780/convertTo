@@ -19,7 +19,7 @@ func RunConsolePromptApp() {
 			}
 		}
 
-		ok := isBinaryString(input)
+		ok := isBinaryFormat(input)
 
 		if !ok {
 			fmt.Println("Require a 4 digit binary number, please try again")
@@ -30,4 +30,14 @@ func RunConsolePromptApp() {
 	}
 
 	fmt.Println("Your number is:", userInput)
+}
+
+func captureInput(rdr io.Reader) (string, error) {
+	var input string
+	_, err := fmt.Fscanln(rdr, &input)
+	if err != nil {
+		return input, err
+	}
+
+	return input, err
 }
