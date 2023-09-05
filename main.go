@@ -8,7 +8,6 @@ import (
 	"strconv"
 )
 
-
 func main() {
 	inputs := NewCmdLineInputs()
 
@@ -20,7 +19,6 @@ func main() {
 	numToConvert := os.Args[2]
 	inputs.dispatchConversion(numToConvert)
 }
-
 
 func findLargestExponent(m float64) (p float64) {
 	// solving for 2^p = m
@@ -53,4 +51,3 @@ func decimalToBinary(m string) string {
 	}
 	return binaryString.String()
 }
-

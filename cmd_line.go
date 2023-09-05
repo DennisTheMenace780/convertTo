@@ -45,9 +45,9 @@ func (c *CmdLineInputs) dispatchConversion(numToConvert string) {
 	if c.convertToBinary() {
 		fmt.Println("Converting", numToConvert, "to binary")
 
-        decimalStr := NewDecimalString(numToConvert)
-        binStr := decimalStr.ToBinaryString()
-        binStr.Display()
+		decimalStr := NewDecimalString(numToConvert)
+		binStr := decimalStr.ToBinaryString()
+		binStr.Display()
 	}
 
 	if c.convertToDecimal() {
@@ -58,7 +58,7 @@ func (c *CmdLineInputs) dispatchConversion(numToConvert string) {
 		fmt.Println("Converting", numToConvert, "to decimal")
 
 		binStr := NewBinaryString(numToConvert)
-        decimalStr := binStr.ToDecimalString()
-        decimalStr.Display()
+		decimalStr := binStr.ToDecimalString()
+		decimalStr.Display()
 	}
 }

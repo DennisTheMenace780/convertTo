@@ -38,9 +38,9 @@ func (ds *DecimalString) ToBinaryString() BinaryString {
 		numerator = remainder
 		largestExponent -= 1
 	}
-    return BinaryString{bstring: binStr.String()}
+	return BinaryString{bstring: binStr.String()}
 }
 
 func (ds *DecimalString) Display() {
-    fmt.Println(ds.dstring)
+	fmt.Println(ds.dstring)
 }

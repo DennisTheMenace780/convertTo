@@ -10,23 +10,24 @@ import (
 
 func numLeadingZerosNeeded(binStr string) int {
 	var numZeros int
-    exp := 2.0
-    lb, ub := 0, 4
+	exp := 2.0
+	lb, ub := 0, 4
 	for {
-		if len(binStr) > lb && len(binStr) < ub {
+		if len(binStr) >= lb && len(binStr) <= ub {
 			numZeros = ub - len(binStr)
 			break
 		}
 		lb = ub
 		exp += 1
-        ub = int(math.Pow(2.0, exp))
+		ub = int(math.Pow(2.0, exp))
 	}
-    return numZeros
+
+	return numZeros
 }
 
 func NewBinaryString(binStr string) BinaryString {
 	var b bytes.Buffer
-    numZeros := numLeadingZerosNeeded(binStr)
+	numZeros := numLeadingZerosNeeded(binStr)
 	// fill in empty space with 0s
 	for n := 0; n < numZeros; n++ {
 		b.WriteString("0")

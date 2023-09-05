@@ -1,4 +1,5 @@
 package main
+
 //
 // import (
 // 	"strings"
@@ -7,48 +8,48 @@ package main
 
 // func TestCaptureInput(t *testing.T) {
 
-	// t.Run("Prints the input value back to user", func(t *testing.T) {
-	//
-	// 	input := "1010\n"
-	// 	rdr := strings.NewReader(input)
-	//
-	// 	captured, _ := CaptureInput(rdr)
-	//
-	// 	want := "1010"
-	//
-	// 	if captured != want {
-	// 		t.Error("unexpected result:", captured)
-	// 	}
-	// })
+// t.Run("Prints the input value back to user", func(t *testing.T) {
+//
+// 	input := "1010\n"
+// 	rdr := strings.NewReader(input)
+//
+// 	captured, _ := CaptureInput(rdr)
+//
+// 	want := "1010"
+//
+// 	if captured != want {
+// 		t.Error("unexpected result:", captured)
+// 	}
+// })
 
-	// t.Run("assert input is a binary string", func(t *testing.T) {
-	//
-	// 	cases := []struct {
-	// 		input    string
-	// 		expected bool
-	// 	}{
-	// 		{"0000", true},
-	// 		{"01", true},
-	// 		{"0300", false},
-	// 		{"0010", true},
-	// 		{"12345", false},
-	// 		{"-1", false},
-	// 		{"A&|.", false},
-	// 		{"", false},
-	// 	}
-	// 	for _, c := range cases {
-	// 		rdr := strings.NewReader(c.input)
-	// 		captured, _ := CaptureInput(rdr)
-	//
-	// 	    ok := isBinaryString(captured)
-	//
-	// 		if ok != c.expected {
-	// 			t.Error("Detected an invalid input: ", captured)
-	// 		}
-	//
-	// 	}
-	//
-	// })
+// t.Run("assert input is a binary string", func(t *testing.T) {
+//
+// 	cases := []struct {
+// 		input    string
+// 		expected bool
+// 	}{
+// 		{"0000", true},
+// 		{"01", true},
+// 		{"0300", false},
+// 		{"0010", true},
+// 		{"12345", false},
+// 		{"-1", false},
+// 		{"A&|.", false},
+// 		{"", false},
+// 	}
+// 	for _, c := range cases {
+// 		rdr := strings.NewReader(c.input)
+// 		captured, _ := CaptureInput(rdr)
+//
+// 	    ok := isBinaryString(captured)
+//
+// 		if ok != c.expected {
+// 			t.Error("Detected an invalid input: ", captured)
+// 		}
+//
+// 	}
+//
+// })
 
 // }
 
