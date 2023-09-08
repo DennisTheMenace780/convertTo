@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+    "binaryTo/src/format"
 	"io"
 	"os"
 )
@@ -19,7 +20,7 @@ func RunConsolePromptApp() {
 			}
 		}
 
-		ok := isBinaryFormat(input)
+		ok := format.IsBinaryFormat(input)
 
 		if !ok {
 			fmt.Println("Require a 4 digit binary number, please try again")

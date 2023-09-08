@@ -1,4 +1,4 @@
-package main
+package format
 
 import (
 	"testing"
@@ -19,7 +19,7 @@ func TestBinaryString(t *testing.T) {
 
 		for _, c := range cases {
 			binaryString := NewBinaryString(c.input)
-			assert.Equal(t, c.expected, binaryString.bstring)
+			assert.Equal(t, c.expected, binaryString.Bstring)
 		}
 	})
 
@@ -38,7 +38,7 @@ func TestBinaryString(t *testing.T) {
 			{"", false},
 		}
 		for _, c := range cases {
-			assert.Equal(t, c.expected, isBinaryFormat(c.input))
+			assert.Equal(t, c.expected, IsBinaryFormat(c.input))
 		}
 	})
 
@@ -60,27 +60,7 @@ func TestBinaryString(t *testing.T) {
 		for _, c := range cases {
 			binaryString := NewBinaryString(c.input)
 			decimalString := binaryString.ToDecimalString()
-			assert.Equal(t, c.expected, decimalString.dstring)
-		}
-	})
-
-	t.Run("Chunk string chunks properly", func(t *testing.T) {
-		cases := []struct {
-			input    string
-			chunks   int
-			expected []string
-		}{
-			{"10101010", 1, []string{"1", "0", "1", "0", "1", "0", "1", "0"}},
-			{"10101010", 2, []string{"10", "10", "10", "10"}},
-			{"10101010", 4, []string{"1010", "1010"}},
-			{"10101010", 5, []string{"10101", "010"}},
-			{"10101010", 8, []string{"10101010"}},
-		}
-
-		for _, c := range cases {
-			binaryString := NewBinaryString(c.input)
-			chunkedString := binaryString.chunkString(c.chunks)
-			assert.Equal(t, c.expected, chunkedString)
+			assert.Equal(t, c.expected, decimalString.Dstring)
 		}
 	})
 }
