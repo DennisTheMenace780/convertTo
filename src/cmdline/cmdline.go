@@ -5,7 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
-    "binaryTo/src/format"
+    "convertTo/src/format"
 )
 
 type CmdLineInputs struct {
@@ -34,6 +34,7 @@ func (c *CmdLineInputs) IsValid() error {
 	if len(os.Args[1:]) != 2 {
 		return errors.New("More than one flag or arg provided")
 	}
+    fmt.Println(os.Args)
 	return nil
 }
 

@@ -1,7 +1,7 @@
 package format
 
 import (
-	"binaryTo/src/utils"
+	"convertTo/src/utils"
 	"bytes"
 	"fmt"
 	"math"

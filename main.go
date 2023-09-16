@@ -1,7 +1,7 @@
 package main
 
 import (
-	"binaryTo/src/cmdline"
+	"convertTo/v2/src/cmdline"
 	"os"
 )
 
@@ -14,6 +14,5 @@ func main() {
 	}
 
 	numToConvert := os.Args[2]
-	inputs.DispatchConversion(numToConvert)
+	inputs.Dispatch(numToConvert)
 }
-

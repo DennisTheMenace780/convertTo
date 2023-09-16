@@ -1,4 +1,4 @@
-module binaryTo
+module convertTo
 
 go 1.21.0
 

@@ -1,9 +1,9 @@
 package main
 
 import (
+	"convertTo/src/format"
 	"errors"
 	"fmt"
-    "binaryTo/src/format"
 	"io"
 	"os"
 )
